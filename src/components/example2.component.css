@@ -1,0 +1,10 @@
+.title {
+  color: #252525;
+}
+
+@media only screen and (max-width: 600px) {
+  .title {
+    color: #a80404;
+    width: 120%;
+  }
+}

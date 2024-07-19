@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Angular elements example</title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <style>
+    :root {
+      --color: green;
+    }
+
+    .title {
+      color: red;
+    }
+
+    .left {
+      color: var(--color);
+    }
+
+    .right {
+      color: var(--color);
+    }
+
+    .container {
+      min-height: 50vh;
+      border-bottom: 1px solid black;
+      margin: 2rem 0;
+    }
+  </style>
+
+  <body>
+    <!-- Example#1 Input-Output -->
+    <div class="container">
+      <h3>Example#1 Input-Output</h3>
+      <in-out-component id="first-component" counter="0"></in-out-component>
+
+      <script>
+        let counter = 0;
+        const firstComponent = document.getElementById('first-component');
+
+        function updateName() {
+          firstComponent.setAttribute('counter', ++counter);
+        }
+
+        firstComponent.addEventListener('sendOut', (data) => {
+          alert(data.detail);
+        });
+      </script>
+
+      <button onclick="updateName()" right>Increase</button>
+    </div>
+
+    <!-- Example#2 Mediaquery -->
+    <div class="container">
+      <h3>Example#2 Mediaquery</h3>
+      <div style="width: 50%; margin: 0 auto; border: 1px solid black">
+        <mediaquery-component></mediaquery-component>
+      </div>
+    </div>
+
+    <!-- Example#3 Get window -->
+    <div class="container">
+      <h3>Example#3 Get window</h3>
+      <window-reader-component></window-reader-component>
+
+      <script>
+        globalThis.thisData = {
+          field1: 'field1',
+        };
+        window.windowData = {
+          field2: 'field2',
+        };
+      </script>
+    </div>
+
+    <!-- Example#4 ng-content -->
+    <div class="container">
+      <h3>Example#4 ng-content</h3>
+
+      <layout-component>
+        <window-reader-component></window-reader-component>
+
+        <div class="left" right>Right Twix stick</div>
+        <div class="right" left>Left Twix stick</div>
+      </layout-component>
+    </div>
+
+    <!-- Example#5 Lazy-loading -->
+    <div class="container">
+      <h3>Example#5 Lazy-loading</h3>
+
+      <lazy-wrapper-component></lazy-wrapper-component>
+    </div>
+
+    <!-- Example#6 RxJs connection -->
+    <div class="container">
+      <h3>Example#6 RxJs connection</h3>
+
+      <rx-sender-component></rx-sender-component>
+      <rx-reader-component></rx-reader-component>
+    </div>
+
+    <!-- Example#7 Dynamic mount component -->
+    <div class="container">
+      <h3>Example#7 Dynamic mount component</h3>
+      <button onclick="addElements()">Add element</button>
+
+      <div id="wrapper"></div>
+
+      <script>
+        const wrapper = document.getElementById('wrapper');
+
+        function addElements() {
+          let element = document.createElement('window-reader-component');
+          wrapper.appendChild(element);
+        }
+      </script>
+    </div>
+
+    <link rel="stylesheet" href="http://localhost:4200/styles.css" />
+    <script src="http://localhost:4200/main.js" type="module"></script>
+  </body>
+</html>
